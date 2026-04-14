@@ -42,8 +42,7 @@ Application disponible sur `http://localhost:3000`.
 
 ```env
 AI_API_KEY=your_server_side_api_key
-AI_API_URL=https://api.openai.com/v1/chat/completions
-AI_MODEL=gpt-4.1-mini
+
 ```
 
 Notes :
