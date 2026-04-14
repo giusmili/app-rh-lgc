@@ -13,7 +13,7 @@ export default function HomePage() {
           <div className="space-y-5">
             <span className="section-title">Intranet RH</span>
             <div className="space-y-4">
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-[-0.04em] text-slate-950 md:text-6xl">
+              <h1 className="max-w-3xl text-4xl font-light tracking-[-0.04em] text-slate-950 md:text-6xl">
                 Analysez plusieurs candidatures avec une IA côté serveur, sans
                 stockage permanent.
               </h1>
