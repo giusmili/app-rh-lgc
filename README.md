@@ -1,5 +1,15 @@
 # Intranet RH Next.js
 
+<p>
+  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-111827?style=for-the-badge&logo=next.js" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-1d4ed8?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img alt="React" src="https://img.shields.io/badge/React-19-0f172a?style=for-the-badge&logo=react" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-4-0f766e?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img alt="Zod" src="https://img.shields.io/badge/Zod-Validation-4338ca?style=for-the-badge" />
+  <img alt="PDF Parse" src="https://img.shields.io/badge/PDF_Parse-Extraction-b91c1c?style=for-the-badge" />
+  <img alt="Mammoth" src="https://img.shields.io/badge/DOCX-Mammoth-7c3aed?style=for-the-badge" />
+</p>
+
 Application intranet RH en `Next.js + TypeScript + Tailwind CSS` pour comparer plusieurs candidatures sans base de données ni stockage permanent.
 
 ## Fonctionnalités
