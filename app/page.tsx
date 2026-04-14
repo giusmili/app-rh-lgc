@@ -1,6 +1,8 @@
 import { HrWizard } from "@/components/hr-wizard";
 
 export default function HomePage() {
+  const year = new Date().getFullYear();
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 md:px-6 md:py-8 lg:px-8">
       <section className="glass-panel subtle-grid relative overflow-hidden rounded-[36px] px-6 py-8 md:px-10 md:py-12">
@@ -58,6 +60,12 @@ export default function HomePage() {
       </section>
 
       <HrWizard />
+
+      <footer className="px-1 pb-4 pt-2">
+        <div className="rounded-[28px] border border-slate-200/80 bg-white/70 px-5 py-4 text-center text-sm text-slate-500">
+          © LGC - recherche & développement {year}
+        </div>
+      </footer>
     </main>
   );
 }
