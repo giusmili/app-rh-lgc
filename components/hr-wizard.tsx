@@ -71,34 +71,32 @@ export function HrWizard() {
     setError(null);
     setResult(null);
 
-    startTransition(() => {
-      void (async () => {
-        try {
-          const formData = new FormData();
-          formData.append("targetJobId", selectedJob.id);
-          formData.append("criteria", JSON.stringify(criteria));
-          files.forEach((file) => formData.append("files", file));
+    startTransition(async () => {
+      try {
+        const formData = new FormData();
+        formData.append("targetJobId", selectedJob.id);
+        formData.append("criteria", JSON.stringify(criteria));
+        files.forEach((file) => formData.append("files", file));
 
-          const response = await fetch("/api/analyze", {
-            method: "POST",
-            body: formData
-          });
+        const response = await fetch("/api/analyze", {
+          method: "POST",
+          body: formData
+        });
 
-          const payload = (await response.json()) as AnalyzeResponse | { error?: string };
+        const payload = (await response.json()) as AnalyzeResponse | { error?: string };
 
-          if (!response.ok) {
-            throw new Error(("error" in payload && payload.error) || "Analyse impossible.");
-          }
-
-          setResult(payload as AnalyzeResponse);
-        } catch (analysisError) {
-          setError(
-            analysisError instanceof Error
-              ? analysisError.message
-              : "Erreur inattendue pendant l'analyse."
-          );
+        if (!response.ok) {
+          throw new Error(("error" in payload && payload.error) || "Analyse impossible.");
         }
-      })();
+
+        setResult(payload as AnalyzeResponse);
+      } catch (analysisError) {
+        setError(
+          analysisError instanceof Error
+            ? analysisError.message
+            : "Erreur inattendue pendant l'analyse."
+        );
+      }
     });
   }
 
@@ -107,25 +105,33 @@ export function HrWizard() {
       return;
     }
 
-    const response = await fetch("/api/report", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(result)
-    });
+    try {
+      const response = await fetch("/api/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result)
+      });
 
-    if (!response.ok) {
-      const payload = (await response.json()) as { error?: string };
-      setError(payload.error || "Impossible de générer le rapport.");
-      return;
+      if (!response.ok) {
+        const payload = (await response.json()) as { error?: string };
+        setError(payload.error || "Impossible de générer le rapport.");
+        return;
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `rapport-rh-${selectedJob.id}.md`;
+      anchor.click();
+      URL.revokeObjectURL(url);
+    } catch (downloadError) {
+      setError(
+        downloadError instanceof Error
+          ? downloadError.message
+          : "Erreur inattendue lors du téléchargement."
+      );
     }
-
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = `rapport-rh-${selectedJob.id}.md`;
-    anchor.click();
-    URL.revokeObjectURL(url);
   }
 
   return (

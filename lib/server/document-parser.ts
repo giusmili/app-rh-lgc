@@ -20,7 +20,7 @@ export async function withTemporaryFile<T>(
 ) {
   assertSupportedFile(fileName);
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), "app-rh-"));
-  const filePath = path.join(directory, fileName);
+  const filePath = path.join(directory, path.basename(fileName));
 
   await fs.writeFile(filePath, content);
 
