@@ -100,13 +100,13 @@ export function HrWizard() {
     });
   }
 
-  async function downloadReport() {
+  async function downloadFile(endpoint: string, filename: string) {
     if (!result) {
       return;
     }
 
     try {
-      const response = await fetch("/api/report", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(result)
@@ -122,7 +122,7 @@ export function HrWizard() {
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = `rapport-rh-${selectedJob.id}.md`;
+      anchor.download = filename;
       anchor.click();
       URL.revokeObjectURL(url);
     } catch (downloadError) {
@@ -132,6 +132,14 @@ export function HrWizard() {
           : "Erreur inattendue lors du téléchargement."
       );
     }
+  }
+
+  function downloadReport() {
+    return downloadFile("/api/report", `rapport-rh-${selectedJob.id}.md`);
+  }
+
+  function downloadPdfReport() {
+    return downloadFile("/api/report-pdf", `rapport-rh-${selectedJob.id}.pdf`);
   }
 
   return (
@@ -276,8 +284,31 @@ export function HrWizard() {
                 type="button"
                 onClick={analyzeCandidates}
                 disabled={files.length === 0 || isPending}
-                className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+                className="flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
               >
+                {isPending && (
+                  <svg
+                    className="h-4 w-4 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
+                  </svg>
+                )}
                 {isPending ? "Analyse en cours..." : "Lancer l'analyse"}
               </button>
             </div>
@@ -321,14 +352,24 @@ export function HrWizard() {
                   Le classement est indicatif et destiné à guider l'analyse RH, pas à automatiser la décision finale.
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={downloadReport}
-                disabled={!result}
-                className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-400"
-              >
-                Télécharger le rapport
-              </button>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={downloadPdfReport}
+                  disabled={!result}
+                  className="rounded-2xl bg-slate-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+                >
+                  Télécharger en PDF
+                </button>
+                <button
+                  type="button"
+                  onClick={downloadReport}
+                  disabled={!result}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-400"
+                >
+                  Télécharger en Markdown
+                </button>
+              </div>
             </div>
 
             {!result ? (
