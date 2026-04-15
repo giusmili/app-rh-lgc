@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState, useTransition, type ChangeEvent } from "react";
+import styles from "./hr-wizard.module.css";
 import { JOB_PROFILES } from "@/lib/job-profiles";
-import { cn, formatPercent } from "@/lib/utils";
+import { formatPercent } from "@/lib/utils";
 import type {
   AnalyzeResponse,
   JobCriterion,
@@ -143,49 +144,44 @@ export function HrWizard() {
   }
 
   return (
-    <section className="py-8">
-      <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-        <aside className="glass-panel h-fit rounded-[30px] p-5">
-          <p className="section-title">Parcours</p>
-          <div className="mt-5 space-y-3">
+    <section className={styles.section}>
+      <div className={styles.layout}>
+        <aside className={`${styles.panel} ${styles.stickyPanel}`}>
+          <p className={styles.sectionTitle}>Parcours</p>
+          <div className={styles.stepList}>
             {STEPS.map((step, index) => {
               const enabled = index < 2 || files.length > 0 || Boolean(result);
               return (
                 <div
                   key={step}
-                  className={cn(
-                    "rounded-[22px] border px-4 py-4 text-sm font-medium transition-colors",
-                    enabled
-                      ? "border-slate-200 bg-white text-slate-900"
-                      : "border-transparent bg-transparent text-slate-400"
-                  )}
+                  className={`${styles.stepItem} ${enabled ? styles.stepItemActive : styles.stepItemInactive}`}
                 >
-                  <span className="block text-xs uppercase tracking-[0.18em] text-slate-400">
+                  <span className={styles.stepLabel}>
                     Étape {index + 1}
                   </span>
-                  <span className="mt-1 block">{step.replace(/^\d+\.\s/, "")}</span>
+                  <span className={styles.stepName}>{step.replace(/^\d+\.\s/, "")}</span>
                 </div>
               );
             })}
           </div>
         </aside>
 
-        <div className="space-y-6">
-          <div className="glass-panel rounded-[30px] p-6 md:p-8">
-            <p className="section-title">Étape 1</p>
-            <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <h2 className="text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+        <div className={styles.stack}>
+          <div className={styles.panel}>
+            <p className={styles.sectionTitle}>Étape 1</p>
+            <div className={styles.sectionHeader}>
+              <div className={styles.headerText}>
+                <h2 className={styles.heading}>
                   Choisissez le métier cible
                 </h2>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                <p className={styles.subheading}>
                   Les critères et leurs poids sont préchargés par métier, puis modifiables avant l'analyse.
                 </p>
               </div>
               <select
                 value={selectedJobId}
                 onChange={(event) => handleJobChange(event.target.value as TargetJobId)}
-                className="field-base rounded-2xl px-4 py-3 text-sm text-slate-700"
+                className={styles.select}
               >
                 {JOB_PROFILES.map((job) => (
                   <option key={job.id} value={job.id}>
@@ -194,41 +190,41 @@ export function HrWizard() {
                 ))}
               </select>
             </div>
-            <p className="mt-4 rounded-[24px] border border-slate-200/80 bg-white/80 px-4 py-4 text-sm leading-6 text-slate-600">
+            <p className={styles.summaryBox}>
               {selectedJob.summary}
             </p>
           </div>
 
-          <div className="glass-panel rounded-[30px] p-6 md:p-8">
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div>
-                <p className="section-title">Étape 2</p>
-                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+          <div className={styles.panel}>
+            <div className={styles.sectionHeaderWide}>
+              <div className={styles.headerText}>
+                <p className={styles.sectionTitle}>Étape 2</p>
+                <h2 className={styles.heading}>
                   Ajustez les critères pondérés
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
+                <p className={styles.subheading}>
                   Le poids influence le score final. Le total conseillé est de 100 %.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={resetCriteria}
-                className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+                className={styles.buttonSecondary}
               >
                 Réinitialiser les critères
               </button>
             </div>
 
-            <div className="mt-6 grid gap-4">
+            <div className={styles.criteriaList}>
               {criteria.map((criterion, index) => (
                 <div
                   key={criterion.id}
-                  className="soft-card grid gap-3 rounded-[26px] px-4 py-4 md:grid-cols-[1.25fr_2fr_120px]"
+                  className={styles.criteriaCard}
                 >
                   <input
                     value={criterion.label}
                     onChange={(event) => updateCriterion(index, { label: event.target.value })}
-                    className="field-base rounded-2xl px-3 py-3 text-sm"
+                    className={styles.input}
                     aria-label={`Libellé du critère ${index + 1}`}
                   />
                   <input
@@ -236,7 +232,7 @@ export function HrWizard() {
                     onChange={(event) =>
                       updateCriterion(index, { description: event.target.value })
                     }
-                    className="field-base rounded-2xl px-3 py-3 text-sm"
+                    className={styles.input}
                     aria-label={`Description du critère ${index + 1}`}
                   />
                   <input
@@ -248,35 +244,28 @@ export function HrWizard() {
                     onChange={(event) =>
                       updateCriterion(index, { weight: Number(event.target.value) })
                     }
-                    className="field-base rounded-2xl px-3 py-3 text-sm"
+                    className={styles.input}
                     aria-label={`Poids du critère ${index + 1}`}
                   />
                 </div>
               ))}
             </div>
 
-            <div
-              className={cn(
-                "mt-4 rounded-[24px] px-4 py-4 text-sm font-medium",
-                totalWeight === 100
-                  ? "border border-emerald-100 bg-emerald-50/80 text-emerald-800"
-                  : "border border-amber-100 bg-amber-50/90 text-amber-900"
-              )}
-            >
+            <div className={totalWeight === 100 ? styles.weightAlert : styles.weightAlertWarning}>
               Total des poids: {formatPercent(totalWeight)}
               {totalWeight !== 100 &&
                 " - l'analyse fonctionne tout de même, mais un total à 100 % reste plus lisible."}
             </div>
           </div>
 
-          <div className="glass-panel rounded-[30px] p-6 md:p-8">
-            <p className="section-title">Étape 3</p>
-            <div className="mt-3 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <h2 className="text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+          <div className={styles.panel}>
+            <p className={styles.sectionTitle}>Étape 3</p>
+            <div className={styles.sectionHeaderWide}>
+              <div className={styles.headerText}>
+                <h2 className={styles.heading}>
                   Importez les CV ou documents candidats
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
+                <p className={styles.subheading}>
                   Formats acceptés : PDF, DOCX, TXT. Aucun document n'est stocké durablement et les fichiers temporaires sont supprimés après traitement.
                 </p>
               </div>
@@ -284,18 +273,18 @@ export function HrWizard() {
                 type="button"
                 onClick={analyzeCandidates}
                 disabled={files.length === 0 || isPending}
-                className="flex items-center gap-2 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+                className={styles.button}
               >
                 {isPending && (
                   <svg
-                    className="h-4 w-4 animate-spin"
+                    className={styles.spinner}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
                     <circle
-                      className="opacity-25"
+                      className={styles.spinnerTrack}
                       cx="12"
                       cy="12"
                       r="10"
@@ -303,32 +292,64 @@ export function HrWizard() {
                       strokeWidth="4"
                     />
                     <path
-                      className="opacity-75"
+                      className={styles.spinnerHead}
                       fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                     />
+                  </svg>
+                )}
+                {!isPending && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" />
                   </svg>
                 )}
                 {isPending ? "Analyse en cours..." : "Lancer l'analyse"}
               </button>
             </div>
 
-            <div className="mt-5 rounded-[28px] border border-dashed border-slate-300 bg-white/60 p-6">
-              <input
-                type="file"
-                multiple
-                accept=".pdf,.docx,.txt"
-                onChange={onFilesChange}
-                className="block w-full text-sm text-slate-600 file:mr-4 file:rounded-2xl file:border-0 file:bg-slate-950 file:px-4 file:py-3 file:text-sm file:font-medium file:text-white"
-              />
+            <div className={styles.uploadZone}>
+              <div className={styles.uploadStack}>
+                <input
+                  id="candidate-files"
+                  type="file"
+                  multiple
+                  accept=".pdf,.docx,.txt"
+                  onChange={onFilesChange}
+                  className={styles.srOnly}
+                />
+                <label
+                  htmlFor="candidate-files"
+                  className={styles.uploadButton}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 20q-.825 0-1.412-.587T3 18v-3h2v3h14v-3h2v3q0 .825-.587 1.413T19 20H5Zm7-4-5-5 1.4-1.425 2.6 2.6V4h2v8.175l2.6-2.6L17 11l-5 5Z" />
+                  </svg>
+                  <span>Parcourir les fichiers</span>
+                </label>
+                <p className={styles.uploadStatus}>
+                  {files.length === 0
+                    ? "Aucun fichier sélectionné."
+                    : `${files.length} fichier(s) sélectionné(s).`}
+                </p>
+              </div>
             </div>
 
             {files.length > 0 && (
-              <div className="mt-4 grid gap-3 md:grid-cols-2">
+              <div className={styles.fileList}>
                 {files.map((file) => (
                   <div
                     key={`${file.name}-${file.lastModified}`}
-                    className="soft-card rounded-2xl px-4 py-3 text-sm text-slate-700"
+                    className={styles.fileCard}
                   >
                     {file.name}
                   </div>
@@ -337,61 +358,77 @@ export function HrWizard() {
             )}
 
             {error && (
-              <div className="mt-4 rounded-2xl bg-red-50 px-4 py-4 text-sm text-red-700">{error}</div>
+              <div className={styles.errorBox}>{error}</div>
             )}
           </div>
 
-          <div className="glass-panel rounded-[30px] p-6 md:p-8">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="section-title">Étape 4</p>
-                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+          <div className={styles.panel}>
+            <div className={styles.sectionHeader}>
+              <div className={styles.headerText}>
+                <p className={styles.sectionTitle}>Étape 4</p>
+                <h2 className={styles.heading}>
                   Comparatif, classement et rapport
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
+                <p className={styles.subheading}>
                   Le classement est indicatif et destiné à guider l'analyse RH, pas à automatiser la décision finale.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className={styles.buttonRow}>
                 <button
                   type="button"
                   onClick={downloadPdfReport}
                   disabled={!result}
-                  className="rounded-2xl bg-slate-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+                  className={styles.button}
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7Zm-14 9h14v2H5v-2Z" />
+                  </svg>
                   Télécharger en PDF
                 </button>
                 <button
                   type="button"
                   onClick={downloadReport}
                   disabled={!result}
-                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-400"
+                  className={styles.buttonSecondary}
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6Zm0 2.5L17.5 8H14V4.5ZM8 13h8v1.5H8V13Zm0 3h8v1.5H8V16Zm0-6h5v1.5H8V10Z" />
+                  </svg>
                   Télécharger en Markdown
                 </button>
               </div>
             </div>
 
             {!result ? (
-              <div className="mt-5 rounded-[24px] border border-slate-200 bg-white/80 px-4 py-6 text-sm leading-6 text-slate-500">
+              <div className={styles.placeholder}>
                 Lancez une analyse pour afficher le classement, le détail par critère et le comparatif candidat par candidat.
               </div>
             ) : (
-              <div className="mt-6 space-y-6">
-                <div className="rounded-[26px] border border-slate-200 bg-slate-950 px-5 py-5 text-sm leading-6 text-slate-100">
+              <div className={styles.resultBody}>
+                <div className={styles.disclaimerBox}>
                   {result.disclaimer}
                 </div>
 
-                <div className="overflow-x-auto rounded-[28px] border border-slate-200 bg-white/95">
-                  <table className="min-w-full text-left text-sm">
-                    <thead className="bg-slate-50/90 text-slate-600">
+                <div className={styles.tableWrap}>
+                  <table className={styles.table}>
+                    <thead>
                       <tr>
-                        <th className="px-4 py-3 font-medium">Rang</th>
-                        <th className="px-4 py-3 font-medium">Candidat</th>
-                        <th className="px-4 py-3 font-medium">Score final</th>
-                        <th className="px-4 py-3 font-medium">Confiance IA</th>
+                        <th>Rang</th>
+                        <th>Candidat</th>
+                        <th>Score final</th>
+                        <th>Confiance IA</th>
                         {result.targetJob.criteria.map((criterion) => (
-                          <th key={criterion.id} className="px-4 py-3 font-medium">
+                          <th key={criterion.id}>
                             {criterion.label}
                           </th>
                         ))}
@@ -399,15 +436,15 @@ export function HrWizard() {
                     </thead>
                     <tbody>
                       {result.candidates.map((candidate) => (
-                        <tr key={candidate.id} className="border-t border-slate-100 hover:bg-slate-50/60">
-                          <td className="px-4 py-4 font-semibold text-slate-900">#{candidate.rank}</td>
-                          <td className="px-4 py-4 text-slate-700">{candidate.fileName}</td>
-                          <td className="px-4 py-4 font-medium text-slate-900">
+                        <tr key={candidate.id}>
+                          <td className={styles.rankCell}>#{candidate.rank}</td>
+                          <td>{candidate.fileName}</td>
+                          <td className={styles.scoreCell}>
                             {candidate.normalizedScore.toFixed(1)} / 100
                           </td>
-                          <td className="px-4 py-4 text-slate-700">{candidate.analysis.confidence} / 100</td>
+                          <td>{candidate.analysis.confidence} / 100</td>
                           {candidate.analysis.criteria.map((criterion) => (
-                            <td key={criterion.criterionId} className="px-4 py-4 text-slate-700">
+                            <td key={criterion.criterionId}>
                               {criterion.score}/100
                             </td>
                           ))}
@@ -417,65 +454,59 @@ export function HrWizard() {
                   </table>
                 </div>
 
-                <div className="grid gap-4">
+                <div className={styles.candidateCards}>
                   {result.candidates.map((candidate) => (
-                    <article
-                      key={candidate.id}
-                      className="soft-card rounded-[30px] p-5"
-                    >
-                      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                        <div>
-                          <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                    <article key={candidate.id} className={styles.candidateCard}>
+                      <div className={styles.candidateHeader}>
+                        <div className={styles.candidateMeta}>
+                          <p className={styles.rankLabel}>
                             Rang {candidate.rank}
                           </p>
-                          <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-slate-950">
+                          <h3 className={styles.candidateName}>
                             {candidate.fileName}
                           </h3>
-                          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{candidate.analysis.summary}</p>
+                          <p className={styles.candidateSummary}>{candidate.analysis.summary}</p>
                         </div>
-                        <div className="rounded-[24px] border border-slate-200 bg-white px-5 py-4 text-slate-950">
-                          <div className="text-xs uppercase tracking-[0.18em] text-slate-400">Score pondéré</div>
-                          <div className="mt-2 text-3xl font-semibold">{candidate.normalizedScore.toFixed(1)}</div>
+                        <div className={styles.scoreBox}>
+                          <div className={styles.scoreCaption}>Score pondéré</div>
+                          <div className={styles.scoreValue}>{candidate.normalizedScore.toFixed(1)}</div>
                         </div>
                       </div>
 
-                      <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                      <div className={styles.infoGrid}>
                         <InfoCard title="Forces" items={candidate.analysis.strengths} />
                         <InfoCard title="Risques" items={candidate.analysis.risks} />
                         <InfoCard title="Axes d'entretien" items={candidate.analysis.recommendedInterviewFocus} />
                       </div>
 
-                      <div className="mt-5 rounded-[22px] border border-slate-200 bg-white px-4 py-4 text-sm leading-6 text-slate-700">
+                      <div className={styles.globalComment}>
                         {candidate.analysis.globalComment}
                       </div>
 
-                      <div className="mt-5 grid gap-4 md:grid-cols-2">
+                      <div className={styles.criteriaGrid}>
                         {candidate.analysis.criteria.map((criterion) => (
-                          <div
-                            key={criterion.criterionId}
-                            className="rounded-[22px] border border-slate-200 bg-white px-4 py-4"
-                          >
-                            <div className="flex items-start justify-between gap-4">
+                          <div key={criterion.criterionId} className={styles.criterionCard}>
+                            <div className={styles.criterionHeader}>
                               <div>
-                                <p className="font-semibold text-slate-900">{criterion.label}</p>
-                                <p className="mt-1 text-xs uppercase tracking-[0.14em] text-slate-500">
+                                <p className={styles.criterionTitle}>{criterion.label}</p>
+                                <p className={styles.criterionWeight}>
                                   Poids {criterion.weight} %
                                 </p>
                               </div>
-                              <div className="rounded-full bg-slate-950 px-3 py-2 text-sm font-semibold text-white">
+                              <div className={styles.criterionBadge}>
                                 {criterion.score}/100
                               </div>
                             </div>
-                            <p className="mt-3 text-sm leading-6 text-slate-600">{criterion.rationale}</p>
+                            <p className={styles.criterionText}>{criterion.rationale}</p>
                           </div>
                         ))}
                       </div>
 
-                      <details className="mt-5 rounded-[22px] border border-slate-200 bg-white px-4 py-4">
-                        <summary className="cursor-pointer text-sm font-medium text-slate-700">
+                      <details className={styles.detailsBox}>
+                        <summary className={styles.detailsSummary}>
                           Aperçu du texte extrait
                         </summary>
-                        <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-600">
+                        <p className={styles.detailsContent}>
                           {candidate.extractedTextPreview || "Aucun extrait disponible."}
                         </p>
                       </details>
@@ -493,12 +524,12 @@ export function HrWizard() {
 
 function InfoCard({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="rounded-[24px] border border-slate-200 bg-white px-4 py-4">
-      <p className="text-sm font-semibold tracking-[-0.01em] text-slate-950">{title}</p>
-      <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+    <div className={styles.infoCard}>
+      <p className={styles.infoTitle}>{title}</p>
+      <ul className={styles.infoList}>
         {items.map((item) => (
-          <li key={item} className="flex gap-3">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-400" />
+          <li key={item} className={styles.infoItem}>
+            <span className={styles.infoDot} />
             <span>{item}</span>
           </li>
         ))}

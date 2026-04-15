@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 :root {
   --foreground: #162033;
   --muted: #5f6b7c;
@@ -28,8 +26,7 @@ body {
     radial-gradient(circle at top left, rgba(15, 118, 110, 0.08), transparent 24%),
     radial-gradient(circle at top right, rgba(148, 163, 184, 0.12), transparent 26%),
     linear-gradient(180deg, #f6f8fb 0%, #f3f5f8 54%, #eef2f7 100%);
-  font-family:
-    "Segoe UI", "Aptos", "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 button,
@@ -37,48 +34,4 @@ input,
 select,
 textarea {
   font: inherit;
-}
-
-.glass-panel {
-  background: var(--panel);
-  backdrop-filter: blur(14px);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-}
-
-.section-title {
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-.soft-card {
-  background: var(--panel-strong);
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-}
-
-.field-base {
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: rgba(255, 255, 255, 0.96);
-  transition:
-    border-color 160ms ease,
-    box-shadow 160ms ease,
-    background-color 160ms ease;
-}
-
-.field-base:focus {
-  outline: none;
-  border-color: rgba(15, 118, 110, 0.5);
-  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.08);
-}
-
-.subtle-grid {
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
-  background-position: center;
 }

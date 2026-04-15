@@ -59,7 +59,9 @@ export async function POST(request: Request) {
         const extractedText = await withTemporaryFile(file.name, buffer, extractTextFromPath);
 
         if (!extractedText) {
-          throw new Error(`Impossible d'extraire un texte exploitable pour ${file.name}.`);
+          throw new Error(
+            `Impossible d'extraire un texte exploitable pour ${file.name}. Le PDF est probablement scanné sous forme d'image ou protégé.`
+          );
         }
 
         const ai = await analyzeCandidateWithAi({

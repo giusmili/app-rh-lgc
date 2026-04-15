@@ -36,7 +36,9 @@ export async function extractTextFromPath(filePath: string) {
 
   if (extension === ".pdf") {
     const data = await fs.readFile(filePath);
-    const parsed = await pdfParse(data);
+    const parsed = await pdfParse(data, {
+      pagerender: renderPdfPage
+    });
     return sanitizeText(parsed.text);
   }
 
@@ -52,6 +54,32 @@ export async function extractTextFromPath(filePath: string) {
   }
 
   throw new Error(`Extension non gérée: ${extension}`);
+}
+
+async function renderPdfPage(pageData: {
+  getTextContent: (options?: {
+    normalizeWhitespace?: boolean;
+    disableCombineTextItems?: boolean;
+  }) => Promise<{
+    items: Array<{ str?: string; hasEOL?: boolean }>;
+  }>;
+}) {
+  const textContent = await pageData.getTextContent({
+    normalizeWhitespace: true,
+    disableCombineTextItems: false
+  });
+
+  let text = "";
+
+  for (const item of textContent.items) {
+    if (item.str) {
+      text += item.str;
+    }
+
+    text += item.hasEOL ? "\n" : " ";
+  }
+
+  return text;
 }
 
 function sanitizeText(value: string) {
