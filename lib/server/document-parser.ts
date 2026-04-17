@@ -34,23 +34,20 @@ export async function withTemporaryFile<T>(
 export async function extractTextFromPath(filePath: string) {
   const extension = path.extname(filePath).toLowerCase();
 
+  const data = await fs.readFile(filePath);
+
   if (extension === ".pdf") {
-    const data = await fs.readFile(filePath);
-    const parsed = await pdfParse(data, {
-      pagerender: renderPdfPage
-    });
+    const parsed = await pdfParse(data, { pagerender: renderPdfPage });
     return sanitizeText(parsed.text);
   }
 
   if (extension === ".docx") {
-    const data = await fs.readFile(filePath);
     const parsed = await mammoth.extractRawText({ buffer: data });
     return sanitizeText(parsed.value);
   }
 
   if (extension === ".txt") {
-    const data = await fs.readFile(filePath, "utf8");
-    return sanitizeText(data);
+    return sanitizeText(data.toString("utf8"));
   }
 
   throw new Error(`Extension non gérée: ${extension}`);

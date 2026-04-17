@@ -42,7 +42,7 @@ export function HrWizard() {
 
   function handleJobChange(jobId: TargetJobId) {
     const nextJob = JOB_PROFILES.find((job) => job.id === jobId) ?? JOB_PROFILES[0];
-    setSelectedJobId(nextJob.id);
+    setSelectedJobId(jobId);
     setCriteria(cloneCriteria(nextJob.criteria));
     setResult(null);
     setError(null);
