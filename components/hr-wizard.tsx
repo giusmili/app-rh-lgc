@@ -437,7 +437,7 @@ export function HrWizard() {
                     <tbody>
                       {result.candidates.map((candidate) => (
                         <tr key={candidate.id}>
-                          <td className={styles.rankCell}>#{candidate.rank}</td>
+                          <td className={styles.rankCell}>{candidate.rank}</td>
                           <td>{candidate.fileName}</td>
                           <td className={styles.scoreCell}>
                             {candidate.normalizedScore.toFixed(1)} / 100
