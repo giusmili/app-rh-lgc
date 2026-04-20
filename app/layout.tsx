@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.dataset.theme=t;})();` }} />
       </head>
       <body className={poppins.className}>{children}</body>
     </html>
