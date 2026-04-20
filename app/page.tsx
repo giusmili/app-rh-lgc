@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { HrWizard } from "@/components/hr-wizard";
+import { LogoutButton } from "@/components/logout-button";
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -10,9 +12,21 @@ export default function HomePage() {
         <div className={styles.heroOverlay} />
         <div className={styles.heroGlowOne} />
         <div className={styles.heroGlowTwo} />
+        <div className={styles.heroTopBar}>
+          <LogoutButton />
+        </div>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.eyebrow}>Intranet RH</span>
+            <span className={styles.eyebrow}>
+              <Image
+                src="/assets/logo-lgc-only.webp"
+                alt="Logo LGC"
+                width={20}
+                height={20}
+                className={styles.eyebrowLogo}
+              />
+              Intranet RH
+            </span>
             <div className={styles.heroHeading}>
               <h1 className={styles.title}>
                 Analysez plusieurs candidatures et choisissez 

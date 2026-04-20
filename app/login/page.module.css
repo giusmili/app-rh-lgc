@@ -1,0 +1,158 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--offwhite-alpha);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  object-fit: contain;
+}
+
+.brand {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: lighter;
+  color: var(--accent);
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: #020617;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(248, 250, 252, 0.96);
+  border-radius: 14px;
+  padding: 12px 44px 12px 16px;
+  font-size: 0.875rem;
+  color: #334155;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(15, 118, 110, 0.5);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.08);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 160ms ease;
+}
+
+.eyeButton:hover {
+  color: #475569;
+}
+
+.eyeButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+.error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.button {
+  margin-top: 4px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 1px solid #020617;
+  background: #020617;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.button:hover:not(:disabled) {
+  background: #1e293b;
+  border-color: #1e293b;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background: #94a3b8;
+  border-color: #94a3b8;
+}

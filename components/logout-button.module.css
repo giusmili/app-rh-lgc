@@ -1,0 +1,46 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 1);
+  background: rgba(248, 250, 252, 0.8);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.button:hover:not(:disabled) {
+  background: rgba(241, 245, 249, 0.95);
+  border-color: #cbd5e1;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  color: #94a3b8;
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+.spinnerTrack {
+  opacity: 0.25;
+}
+
+.spinnerHead {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

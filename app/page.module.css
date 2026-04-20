@@ -54,6 +54,13 @@
   background: rgba(148, 163, 184, 0.14);
 }
 
+.heroTopBar {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
 .heroContent {
   position: relative;
   display: grid;
@@ -73,11 +80,21 @@
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.72rem;
   font-weight: lighter;
   color: var(--accent);
+}
+
+.eyebrowLogo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .title {
@@ -111,7 +128,7 @@
   padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid rgba(226, 232, 240, 1);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(248, 250, 252, 0.8);
   font-size: 0.875rem;
   color: #334155;
 }
@@ -133,7 +150,7 @@
   padding: 16px;
   border-radius: 24px;
   border: 1px solid rgba(241, 245, 249, 1);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--offwhite-alpha);
 }
 
 .featureIndex {
@@ -164,7 +181,7 @@
 .footerInner {
   border-radius: 28px;
   border: 1px solid rgba(226, 232, 240, 0.8);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(248, 250, 252, 0.7);
   padding: 16px 20px;
   text-align: center;
   font-size: 0.875rem;
