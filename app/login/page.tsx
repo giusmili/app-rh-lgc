@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
@@ -37,6 +38,9 @@ export default function LoginPage() {
 
   return (
     <main className={styles.page}>
+      <div className={styles.topBar}>
+        <ThemeToggle />
+      </div>
       <div className={styles.card}>
         <div className={styles.logoRow}>
           <Image

@@ -58,6 +58,8 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 8px;
 }
 
@@ -186,6 +188,44 @@
   text-align: center;
   font-size: 0.875rem;
   color: #64748b;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .heroOverlay {
+  background: var(--hero-overlay);
+}
+
+[data-theme="dark"] .title {
+  color: var(--color-ink);
+}
+
+[data-theme="dark"] .lead {
+  color: var(--color-muted-text);
+}
+
+[data-theme="dark"] .pill {
+  border-color: var(--color-border);
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--color-body);
+}
+
+[data-theme="dark"] .featureItem {
+  border-color: var(--color-border-light);
+}
+
+[data-theme="dark"] .featureIndex {
+  background: var(--color-ink);
+  color: #020617;
+}
+
+[data-theme="dark"] .featureText {
+  color: var(--color-body);
+}
+
+[data-theme="dark"] .footerInner {
+  border-color: var(--color-border);
+  background: rgba(30, 41, 59, 0.7);
+  color: var(--color-faint);
 }
 
 @media (min-width: 768px) {

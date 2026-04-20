@@ -10,6 +10,50 @@
   --accent: #0f766e;
   --accent-soft: rgba(15, 118, 110, 0.09);
   --shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+
+  --color-ink: #020617;
+  --color-body: #334155;
+  --color-muted-text: #475569;
+  --color-faint: #64748b;
+  --color-placeholder: #94a3b8;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-overlay: rgba(255, 255, 255, 0.88);
+  --bg-radial-1: rgba(15, 118, 110, 0.08);
+  --bg-radial-2: rgba(148, 163, 184, 0.12);
+  --bg-gradient: linear-gradient(180deg, #f6f8fb 0%, #f3f5f8 54%, #eef2f7 100%);
+  --hero-overlay: linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.35));
+}
+
+[data-theme="dark"] {
+  --foreground: #e2e8f0;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --panel: rgba(15, 23, 42, 0.85);
+  --panel-strong: rgba(20, 30, 55, 0.95);
+  --offwhite: #1e293b;
+  --offwhite-alpha: rgba(30, 41, 59, 0.9);
+  --accent: #14b8a6;
+  --accent-soft: rgba(20, 184, 166, 0.12);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  --color-ink: #f1f5f9;
+  --color-body: #cbd5e1;
+  --color-muted-text: #94a3b8;
+  --color-faint: #64748b;
+  --color-placeholder: #475569;
+  --color-surface: #1e293b;
+  --color-surface-hover: #0f172a;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-overlay: rgba(15, 23, 42, 0.88);
+  --bg-radial-1: rgba(20, 184, 166, 0.06);
+  --bg-radial-2: rgba(100, 116, 139, 0.08);
+  --bg-gradient: linear-gradient(180deg, #0b1120 0%, #0d1425 54%, #0a1020 100%);
+  --hero-overlay: linear-gradient(135deg, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.35));
 }
 
 * {
@@ -25,9 +69,9 @@ body {
   min-height: 100vh;
   color: var(--foreground);
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.08), transparent 24%),
-    radial-gradient(circle at top right, rgba(148, 163, 184, 0.12), transparent 26%),
-    linear-gradient(180deg, #f6f8fb 0%, #f3f5f8 54%, #eef2f7 100%);
+    radial-gradient(circle at top left, var(--bg-radial-1), transparent 24%),
+    radial-gradient(circle at top right, var(--bg-radial-2), transparent 26%),
+    var(--bg-gradient);
 }
 
 button,

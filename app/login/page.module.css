@@ -1,9 +1,16 @@
 .page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px 16px;
+}
+
+.topBar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
 
 .card {
@@ -156,3 +163,12 @@
   background: #94a3b8;
   border-color: #94a3b8;
 }
+
+/* ── Dark mode ── */
+[data-theme="dark"] .title { color: var(--color-ink); }
+[data-theme="dark"] .subtitle { color: var(--color-faint); }
+[data-theme="dark"] .label { color: var(--color-body); }
+[data-theme="dark"] .input { background: var(--offwhite-alpha); color: var(--color-ink); border-color: var(--color-border); }
+[data-theme="dark"] .eyeButton { color: var(--color-placeholder); }
+[data-theme="dark"] .eyeButton:hover { color: var(--color-muted-text); }
+[data-theme="dark"] .error { background: rgba(127, 29, 29, 0.3); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; }

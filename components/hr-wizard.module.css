@@ -645,3 +645,44 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* ── Dark mode ── */
+[data-theme="dark"] .heading { color: var(--color-ink); }
+[data-theme="dark"] .subheading { color: var(--color-muted-text); }
+[data-theme="dark"] .stepItemActive { background: var(--color-surface); color: var(--color-ink); border-color: var(--color-border); }
+[data-theme="dark"] .stepLabel { color: var(--color-placeholder); }
+[data-theme="dark"] .buttonSecondary,
+[data-theme="dark"] .buttonGhost { background: var(--color-surface); color: var(--color-body); border-color: var(--color-border); }
+[data-theme="dark"] .buttonSecondary:hover,
+[data-theme="dark"] .buttonGhost:hover { background: var(--color-surface-hover); }
+[data-theme="dark"] .select,
+[data-theme="dark"] .input { background: var(--offwhite-alpha); color: var(--color-ink); border-color: var(--color-border); }
+[data-theme="dark"] .uploadZone { border-color: var(--color-border); background: rgba(30, 41, 59, 0.6); }
+[data-theme="dark"] .uploadStatus { color: var(--color-muted-text); }
+[data-theme="dark"] .summaryBox,
+[data-theme="dark"] .placeholder,
+[data-theme="dark"] .globalComment,
+[data-theme="dark"] .detailsBox { background: rgba(30, 41, 59, 0.88); border-color: var(--color-border); color: var(--color-body); }
+[data-theme="dark"] .detailsSummary { color: var(--color-body); }
+[data-theme="dark"] .detailsContent { color: var(--color-muted-text); }
+[data-theme="dark"] .tableWrap { background: rgba(15, 23, 42, 0.95); border-color: var(--color-border); }
+[data-theme="dark"] .table thead { background: rgba(20, 30, 55, 0.9); color: var(--color-muted-text); }
+[data-theme="dark"] .table tbody tr { border-color: var(--color-border-light); }
+[data-theme="dark"] .table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+[data-theme="dark"] .table td { color: var(--color-body); }
+[data-theme="dark"] .rankCell,
+[data-theme="dark"] .scoreCell { color: var(--color-ink); }
+[data-theme="dark"] .candidateName { color: var(--color-ink); }
+[data-theme="dark"] .candidateSummary { color: var(--color-muted-text); }
+[data-theme="dark"] .rankLabel { color: var(--color-faint); }
+[data-theme="dark"] .scoreBox { background: var(--color-surface); border-color: var(--color-border); color: var(--color-ink); }
+[data-theme="dark"] .scoreCaption { color: var(--color-placeholder); }
+[data-theme="dark"] .infoCard,
+[data-theme="dark"] .criterionCard { background: var(--color-surface); border-color: var(--color-border); }
+[data-theme="dark"] .infoTitle,
+[data-theme="dark"] .criterionTitle { color: var(--color-ink); }
+[data-theme="dark"] .infoList { color: var(--color-muted-text); }
+[data-theme="dark"] .criterionWeight { color: var(--color-faint); }
+[data-theme="dark"] .criterionText { color: var(--color-muted-text); }
+[data-theme="dark"] .criterionBadge { background: var(--color-ink); color: #020617; }
+[data-theme="dark"] .errorBox { background: rgba(127, 29, 29, 0.3); color: #fca5a5; }
