@@ -15,8 +15,8 @@ export default function HomePage() {
             <span className={styles.eyebrow}>Intranet RH</span>
             <div className={styles.heroHeading}>
               <h1 className={styles.title}>
-                Analysez plusieurs candidatures avec une IA côté serveur, sans
-                stockage permanent.
+                Analysez plusieurs candidatures et choisissez 
+                le meilleur profil pour vos besoins professionnels.
               </h1>
               <p className={styles.lead}>
                 Sélection du métier cible, critères pondérés, import multi-documents,
