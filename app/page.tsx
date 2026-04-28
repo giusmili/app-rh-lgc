@@ -2,6 +2,7 @@ import Image from "next/image";
 import { HrWizard } from "@/components/hr-wizard";
 import { LogoutButton } from "@/components/logout-button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ChatbotModal } from "@/components/chatbot-modal";
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -83,6 +84,8 @@ export default function HomePage() {
           © LGC - recherche & développement {year}
         </div>
       </footer>
+
+      <ChatbotModal />
     </main>
   );
 }
